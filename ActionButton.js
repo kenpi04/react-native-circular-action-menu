@@ -33,6 +33,13 @@ const alignMap = {
     startDegree: 180,
     endDegree: 270,
   },
+   centerLeft:{
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    marginLeft:100,
+    startDegree: 90,
+    endDegree: 270,
+  }
 };
 
 export default class ActionButton extends Component {
@@ -175,8 +182,14 @@ export default class ActionButton extends Component {
 
     const childrenCount = React.Children.count(this.props.children);
     let offset = 0;
-    if (childrenCount !== 1) {
-      offset = (endRadian - startRadian) / (childrenCount - 1);
+   if (childrenCount !== 1) {
+      if(this.props.position==="centerLeft")
+      {
+        offset = (startRadian - endRadian) / (childrenCount - 1);
+      }
+      else{
+        offset = (endRadian + startRadian) / (childrenCount - 1);
+      }
     }
 
     return (
